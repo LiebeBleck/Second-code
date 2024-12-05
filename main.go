@@ -153,9 +153,12 @@ func (s Swimming) TrainingInfo() InfoMessage {
 	}
 }
 
-// ReadData выводит информацию о тренировке
+// ReadData выводит информацию о тренировке, с учетом переопределенных калорий
 func ReadData(training CaloriesCalculator) string {
-	return training.TrainingInfo().String()
+	info := training.TrainingInfo()
+	// Переопределяем поле Calories, используя метод Calories() конкретной структуры
+	info.Calories = training.Calories()
+	return info.String()
 }
 
 // main демонстрация работы программы
